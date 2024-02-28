@@ -254,6 +254,16 @@ public class TravelArrayImplTests {
 		Assert.assertEquals(true,ep.sellSeatPos(4, "10203040B","Alice", 34,false));
 		Assert.assertEquals(0, this.ep.getMaxNumberConsecutiveSeats());
 	}
+
+	//TEST getNumberOfChildren y getNumberOfAdvanceSaleSeats
+	@Test
+	public void testNumberOfChildren() {
+		Assert.assertEquals(true,e.sellSeatPos(1, "12345678I","Alic", 8,true));
+		Assert.assertEquals(true,e.sellSeatPos(2, "10203040","Alic", 2,true));
+		Assert.assertEquals(true,ep.sellSeatPos(3, "10203040A","Alice", 34,false));
+		Assert.assertEquals(2, e.getNumberOfChildren());
+		Assert.assertEquals(2, e.getNumberOfAdvanceSaleSeats());
+	}
 		
 	
 			
