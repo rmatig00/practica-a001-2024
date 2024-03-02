@@ -231,10 +231,11 @@ public class TravelArrayImplTests {
 
 	@Test
 	public void testSellSeatFrontPosOK() {	  
-		Assert.assertEquals(true,ep.sellSeatPos(2, "10203040","Alic", 34,true));	  
-		Assert.assertEquals(true,ep.sellSeatPos(3, "10203040A","Alice", 34,false));	  
-		Assert.assertEquals(true,ep.sellSeatPos(4, "10203040B","Alice", 34,false));
-		Assert.assertEquals(1, this.ep.sellSeatFrontPos("12345678I","Alic", 34,true));	  
+		Assert.assertEquals(true,e.sellSeatPos(2, "10203040","Alic", 34,true));	  
+		Assert.assertEquals(true,e.sellSeatPos(3, "10203040A","Alice", 34,false));	  
+		Assert.assertEquals(true,e.sellSeatPos(4, "10203040B","Alice", 34,false));
+		Assert.assertEquals(1, this.e.sellSeatFrontPos("12345678I","Alic", 34,true));
+		Assert.assertEquals(5, this.e.sellSeatFrontPos("12345678F","Alic", 34,true));	  
 	}
 
 	//TEST getMaxNumberConsecutiveSeats
@@ -264,6 +265,44 @@ public class TravelArrayImplTests {
 		Assert.assertEquals(2, e.getNumberOfChildren());
 		Assert.assertEquals(2, e.getNumberOfAdvanceSaleSeats());
 	}
+
+	//TEST getSeat
+	@Test
+	public void testGetSeat() {
+		Assert.assertEquals(null, ep.getSeat(0));	//no existe el seat 0
+		Assert.assertEquals(null, ep.getSeat(1));	//no hay persona
+		Assert.assertEquals(null, ep.getSeat(5));	//hay 4 asientos
+	}
+
+	//TEST refundSeat, getAvailableSeatsList y getAdvanceSaleSeatsList
+	@Test
+	public void testRefundSeat() {
+		Assert.assertEquals(true,ep.sellSeatPos(3, "10203040A","Alice", 34,false));
+		Assert.assertEquals(null, ep.refundSeat(5));
+		Assert.assertEquals(null, ep.refundSeat(2));
+		Assert.assertEquals("[1, 2, 4]", ep.getAvailableSeatsList().toString());
+		Assert.assertEquals("[]", ep.getAdvanceSaleSeatsList().toString());
+	}
+
+	//TEST sellSeatPos
+	@Test
+	public void testSellSeatPos() {
+		Assert.assertEquals(true,ep.sellSeatPos(3, "10203040A","Alice", 34,false));
+		Assert.assertEquals(false,ep.sellSeatPos(3, "20202050B","Ramon", 54,false));
+	}
+
+	//TEST equals
+	@Test
+	public void testEquals() {
+		Person person = new Person("10203040A", "Alice", 34);
+		Person samePerson = new Person("10203040A", "Alice", 34);
+		Assert.assertEquals(true,ep.sellSeatPos(3, "10203040A","Alice", 34,false));
+		Assert.assertTrue(person.equals(person));	//obj equals obj
+		Assert.assertTrue(person.equals(samePerson));	//obj instanceof person
+		Assert.assertFalse(person.equals(ep));	//obj != obj
+	}
+
+
 		
 	
 			
